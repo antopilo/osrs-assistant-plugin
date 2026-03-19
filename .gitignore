@@ -1,0 +1,13 @@
+.gradle
+build
+dist/
+.idea/
+.project
+.settings/
+.classpath
+.claude/
+nbactions.xml
+nb-configuration.xml
+nbproject/
+*.iml
+out/

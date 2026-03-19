@@ -32,17 +32,17 @@ public class DirectLlmService implements AssistantService
 	private String currentSessionId;
 	private volatile CompletableFuture<HttpResponse<String>> activeFuture;
 
-	public DirectLlmService(LlmProvider provider, String apiKey, String modelId, String customPrompt, OsrsAssistantConfig config)
+	public DirectLlmService(LlmProvider provider, String apiKey, String modelId, String customPrompt, OsrsAssistantConfig config, Gson gson)
 	{
 		this.provider = provider;
 		this.apiKey = apiKey;
 		this.model = (modelId != null && !modelId.trim().isEmpty()) ? modelId.trim() : defaultModel(provider);
 		this.customPrompt = customPrompt;
 		this.config = config;
+		this.gson = gson;
 		this.httpClient = HttpClient.newBuilder()
 			.connectTimeout(Duration.ofSeconds(10))
 			.build();
-		this.gson = new Gson();
 	}
 
 	private static String defaultModel(LlmProvider provider)

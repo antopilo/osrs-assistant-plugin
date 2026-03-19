@@ -19,12 +19,12 @@ public class OsrsAssistantClient
 
 	private String apiKey = "";
 
-	public OsrsAssistantClient()
+	public OsrsAssistantClient(Gson gson)
 	{
 		this.httpClient = HttpClient.newBuilder()
 			.connectTimeout(Duration.ofSeconds(10))
 			.build();
-		this.gson = new Gson();
+		this.gson = gson;
 	}
 
 	public void setApiKey(String apiKey)

@@ -8,10 +8,10 @@ public class CustomBackendService implements AssistantService
 	private final OsrsAssistantClient client;
 	private final OsrsAssistantConfig config;
 
-	public CustomBackendService(OsrsAssistantConfig config)
+	public CustomBackendService(OsrsAssistantConfig config, com.google.gson.Gson gson)
 	{
 		this.config = config;
-		this.client = new OsrsAssistantClient();
+		this.client = new OsrsAssistantClient(gson);
 	}
 
 	@Override

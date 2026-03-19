@@ -27,6 +27,7 @@ public class OsrsAssistantPanel extends PluginPanel
 	private AssistantService assistantService;
 	private final SpriteManager spriteManager;
 	private final ItemManager itemManager;
+	private final com.google.gson.Gson gson;
 	private final MarkdownRenderer markdownRenderer;
 	private String sessionId;
 	private final Map<String, ImageIcon> skillIconCache = new HashMap<>();
@@ -78,12 +79,13 @@ public class OsrsAssistantPanel extends PluginPanel
 	private static final String PLACEHOLDER_TEXT = "Ask anything about OSRS...";
 
 
-	public OsrsAssistantPanel(OsrsAssistantPlugin plugin, OsrsAssistantConfig config, SpriteManager spriteManager, ItemManager itemManager)
+	public OsrsAssistantPanel(OsrsAssistantPlugin plugin, OsrsAssistantConfig config, SpriteManager spriteManager, ItemManager itemManager, com.google.gson.Gson gson)
 	{
-		super(false); // disable PluginPanel's built-in wrapping scroll pane
+		super(false);
 
 		this.plugin = plugin;
 		this.config = config;
+		this.gson = gson;
 		this.assistantService = createService();
 		this.spriteManager = spriteManager;
 		this.itemManager = itemManager;
@@ -985,9 +987,9 @@ public class OsrsAssistantPanel extends PluginPanel
 		LlmProvider provider = config.llmProvider();
 		if (provider == LlmProvider.OPENAI || provider == LlmProvider.ANTHROPIC)
 		{
-			return new DirectLlmService(provider, config.apiKey(), config.llmModelId(), config.customPrompt(), config);
+			return new DirectLlmService(provider, config.apiKey(), config.llmModelId(), config.customPrompt(), config, gson);
 		}
-		return new CustomBackendService(config);
+		return new CustomBackendService(config, gson);
 	}
 
 	private void sendMessage()

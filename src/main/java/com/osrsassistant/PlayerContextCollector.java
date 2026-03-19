@@ -24,14 +24,15 @@ public class PlayerContextCollector
 {
 	private final Client client;
 	private final ItemManager itemManager;
+	private final Gson gson;
 	private volatile List<ItemInfo> cachedBank = new ArrayList<>();
-	private final Gson gson = new Gson();
 	private File bankCacheFile;
 
-	public PlayerContextCollector(Client client, ItemManager itemManager)
+	public PlayerContextCollector(Client client, ItemManager itemManager, Gson gson)
 	{
 		this.client = client;
 		this.itemManager = itemManager;
+		this.gson = gson;
 		loadBankCache();
 	}
 

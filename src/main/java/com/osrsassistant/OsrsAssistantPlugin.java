@@ -62,6 +62,9 @@ public class OsrsAssistantPlugin extends Plugin
 	private MouseManager mouseManager;
 
 	@Inject
+	private com.google.gson.Gson gson;
+
+	@Inject
 	private net.runelite.client.eventbus.EventBus eventBus;
 
 	@Inject
@@ -94,7 +97,7 @@ public class OsrsAssistantPlugin extends Plugin
 	@Override
 	protected void startUp()
 	{
-		contextCollector = new PlayerContextCollector(client, itemManager);
+		contextCollector = new PlayerContextCollector(client, itemManager, gson);
 		cachedContext = new PlayerContext();
 
 		checklistOverlay = new ChecklistOverlay(this);
@@ -110,7 +113,7 @@ public class OsrsAssistantPlugin extends Plugin
 		overlayManager.add(widgetHighlightOverlay);
 		checklistOverlay.registerMouse(mouseManager);
 
-		panel = new OsrsAssistantPanel(this, config, spriteManager, itemManager);
+		panel = new OsrsAssistantPanel(this, config, spriteManager, itemManager, gson);
 		menuBuilder = new MenuBuilder(client, panel, navigationManager, checklistManager,
 			() -> cancelNavigation(), () -> navigateToCurrentChecklistStep());
 

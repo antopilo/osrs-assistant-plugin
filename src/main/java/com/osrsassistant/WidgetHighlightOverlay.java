@@ -1,8 +1,8 @@
 package com.osrsassistant;
 
 import net.runelite.api.Client;
+import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
@@ -92,14 +92,14 @@ public class WidgetHighlightOverlay extends Overlay
 
 	private void highlightInventoryItems(Graphics2D graphics, String itemName)
 	{
-		Widget inventory = client.getWidget(WidgetInfo.INVENTORY);
+		Widget inventory = client.getWidget(ComponentID.INVENTORY_CONTAINER);
 		if (inventory == null || inventory.isHidden()) return;
 		highlightItemsInWidget(graphics, inventory, itemName);
 	}
 
 	private void highlightBankItems(Graphics2D graphics, String itemName)
 	{
-		Widget bankContainer = client.getWidget(WidgetInfo.BANK_ITEM_CONTAINER);
+		Widget bankContainer = client.getWidget(ComponentID.BANK_ITEM_CONTAINER);
 		if (bankContainer == null || bankContainer.isHidden()) return;
 		highlightItemsInWidget(graphics, bankContainer, itemName);
 	}

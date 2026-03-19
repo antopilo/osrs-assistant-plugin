@@ -7,8 +7,8 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.Skill;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.ItemManager;
 
 import java.util.Arrays;
@@ -455,7 +455,7 @@ public class StepResolver
 
 	private boolean isBankOpen()
 	{
-		Widget bankWidget = client.getWidget(WidgetInfo.BANK_ITEM_CONTAINER);
+		Widget bankWidget = client.getWidget(ComponentID.BANK_ITEM_CONTAINER);
 		return bankWidget != null && !bankWidget.isHidden();
 	}
 
